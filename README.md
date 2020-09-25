@@ -119,6 +119,18 @@ If you only have two NICs, you can buy this cheap USB 100Mbps NIC [from Amazon](
 
 If everything is setup correctly, netgraph should be bridging EAP traffic between the ONT and RG, tagging the WAN traffic with VLAN0, and your WAN interface configured with an IPv4 address via DHCP.
 
+# Static IP Setup
+If you have a static IPv4 block with AT&T, you can use it with your pfatt configuration. Note that in order to use your IPv4 block, you must set up your connection as stated above first. The normal installation, including setting up DHCP to get a public IP on the WAN interface, should be completed before the steps below.
+
+1. Navigate to _Interfaces > WAN_ and scroll down to **Alias IPv4 address**.
+1. Enter the RG IP address that AT&T provided to you. This is typically one past your last usable static IP.
+1. Navigate to _Firewall > NAT > 1:1_.
+1. Create a new 1:1 NAT rule with the following values.
+   1. Interface: **WAN**
+   1. External Network: **<your desired usable static IP>**
+   1. Internal IP: (Single Host or Network) **<IP of the LAN host or network that you want to have the static IP.>**
+   1. Set the submask accordingly (single devices use `/32`)
+
 # IPv6 Setup
 
 Once your netgraph setup is in place and working, there aren't any netgraph changes required to the setup to get IPv6 working. These instructions can also be followed with a different bypass method other than the netgraph method. Big thanks to @pyrodex1980's [post](http://www.dslreports.com/forum/r32118263-) on DSLReports for sharing your notes.
@@ -137,7 +149,7 @@ This setup assumes you have a fairly recent version of pfSense. I'm using 2.4.5.
 
 1. Go to _Interfaces > WAN_
 1. Enable **IPv6 Configuration Type** as _DHCP6_
-1. Scroll to _DCHP6 Client Configuration_
+1. Scroll to _DHCP6 Client Configuration_
 1. Enable **Request only an IPv6 prefix**
 1. Enable **DHCPv6 Prefix Delegation size** as _60_
 1. Enable _Send IPv6 prefix hint_
