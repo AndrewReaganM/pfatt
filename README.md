@@ -127,8 +127,8 @@ If you have a static IPv4 block with AT&T, you can use it with your pfatt config
 1. Navigate to _Firewall > NAT > 1:1_.
 1. Create a new 1:1 NAT rule with the following values.
    1. Interface: **WAN**
-   1. External Network: **<your desired usable static IP>**
-   1. Internal IP: (Single Host or Network) **<IP of the LAN host or network that you want to have the static IP.>**
+   1. External Network: **your desired usable static IP>**
+   1. Internal IP: (Single Host or Network) **IP of the LAN host or network that you want to have the static IP.**
    1. Set the submask accordingly (single devices use `/32`)
 
 # IPv6 Setup
